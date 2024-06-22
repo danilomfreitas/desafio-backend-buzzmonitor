@@ -3,6 +3,7 @@ const router = express.Router();
 const livroController = require('../controllers/livroController');
 
 router.get('/', livroController.getAllBooks);
+router.get('/busca', livroController.getBookByFilters);
 router.get('/:id', livroController.getBookById);
 router.post('/', livroController.createBook);
 router.put('/:id', livroController.updateBook);

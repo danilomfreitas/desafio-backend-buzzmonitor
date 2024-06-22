@@ -1,8 +1,45 @@
 const { Livro } = require('../../models')
+const { Op } = require('sequelize')
 
 const getAllBooks = async (req, res) => {
     try {
         const books = await Livro.findAll();
+        res.status(200).json(books);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
+const getBookByFilters = async (req, res) => {
+    try {
+        const { titulo, autor, ano_publicacao} = req.query;
+        const filters = {};
+
+        if (titulo) {
+            filters.titulo = {
+                [Op.iLike]: `%${titulo}%`
+            };
+        }
+
+        if (autor) {
+            filters.autor = {
+                [Op.iLike]: `%${autor}%`
+            };
+        }
+
+        if (ano_publicacao) {
+            const parsedYear = parseInt(ano_publicacao, 10);
+            
+            if(!isNaN(parsedYear)){
+                filters.ano_publicacao = parsedYear;
+            } else {
+                return res.status(400).json({ error: 'Ano com formato inválido' });
+            }
+        }
+
+        const books = await Livro.findAll({
+            where: filters
+        });
         res.status(200).json(books);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -62,6 +99,7 @@ const deleteBook = async (req, res) => {
 
 module.exports = {
     getAllBooks,
+    getBookByFilters,
     getBookById,
     createBook,
     updateBook,
