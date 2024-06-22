@@ -23,7 +23,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       status: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.STRING
       },
       createdAt: {
