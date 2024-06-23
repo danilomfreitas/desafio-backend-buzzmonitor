@@ -8,10 +8,10 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const livroRoute = require('./routes/livroRoute');
-const pedidoRoute = require('./routes/pedidoRoute');
+const bookRoute = require('./routes/bookRoute');
+const orderRoute = require('./routes/orderRoute');
 
-app.use('/livros', livroRoute);
-app.use('/pedidos', pedidoRoute);
+app.use('/books', bookRoute);
+app.use('/orders', orderRoute);
 
 module.exports = app;

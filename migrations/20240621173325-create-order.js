@@ -2,23 +2,23 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('pedidos', {
+    await queryInterface.createTable('orders', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      livro_id: {
+      book_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'livros',
+          model: 'books',
           key:'id'
         },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL'
       },
-      quantidade: {
+      quantity: {
         allowNull: false,
         type: Sequelize.INTEGER
       },
@@ -37,6 +37,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('pedidos');
+    await queryInterface.dropTable('orders');
   }
 };
