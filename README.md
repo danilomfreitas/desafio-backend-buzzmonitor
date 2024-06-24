@@ -68,6 +68,9 @@
 
 - **.env**: Arquivo de configuração que guarda variáveis de ambiente sensíveis como credenciais de acesso ao banco de dados.
 
+<h3> Decisões de arquitetura </h3>
+Optei por uma arquitetura modular, separando responsabilidades em controladores, serviços, modelos e rotas, visando a clareza e a manutenção do código. Utilizei também o Sequelize como ORM para facilitar a interação com o banco de dados PostgreSQL, garantindo consistência e facilidade nas migrações. A organização dos arquivos em diretórios específicos melhora a legibilidade e facilita a navegação no projeto. Os testes unitários escritos com Jest e Supertest, asseguram a qualidade do código e a correta funcionalidade da aplicação. A utilização de variáveis de ambiente centraliza configurações sensíveis, promovendo segurança e flexibilidade na configuração do ambiente.
+
 <h2 id="started">🚀 Começando</h2>
 
 <h3>Pré-Requisitos</h3>
