@@ -1,4 +1,3 @@
-const order = require('../../models/order');
 const OrderService = require('../services/orderService');
 
 const createOrder = async (req, res) => {
@@ -24,9 +23,20 @@ const getAllOrders = async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
-}
+};
+
+const getOrdersByFilters = async (req, res) => {
+    try {
+        const filters = req.query;
+        const orders = await OrderService.getOrdersByFilters(filters);
+        res.status(200).json(orders);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    } 
+};
 
 module.exports = {
     createOrder,
-    getAllOrders
+    getAllOrders,
+    getOrdersByFilters
 };

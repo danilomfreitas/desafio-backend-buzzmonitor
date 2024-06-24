@@ -1,4 +1,5 @@
-const { Order, Book} = require('../../models');
+const { Order, Book} = require('../models');
+const { Op } = require('sequelize');
 
 class OrderService {
     static async createOrder(data) {
@@ -52,6 +53,31 @@ class OrderService {
                 include: [{
                     model:Book,
                     as:'book'
+                }]
+            });
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    }
+
+    static async getOrdersByFilters(filters) {
+        try {
+            const queryFilters = {};
+
+            if (filters.book_id) {
+                queryFilters.book_id = filters.book_id;
+            }
+            if (filters.status) {
+                queryFilters.status = {
+                    [Op.iLike]: `%${filters.status}%`
+                };
+            }
+
+            return await Order.findAll({
+                where: queryFilters,
+                include: [{
+                    model: Book,
+                    as: 'book'
                 }]
             });
         } catch (error) {
