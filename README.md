@@ -114,7 +114,7 @@ npm install
 Conecte-se ao PostgreSQL e crie o banco de dados, após isso execute as migrações:
 
 ```bash
-npx sequelize-cli db:migrate
+npx sequelize-cli db:migrate --config=db/config/config.js --migrations-path=db/migrations
 ```
 
 Executando o projeto:
