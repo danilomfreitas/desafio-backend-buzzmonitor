@@ -4,8 +4,6 @@ const createOrder = async (req, res) => {
     try {
         const result = await OrderService.createOrder(req.body);
 
-        console.log(result);
-
         if (result.status === 'error') {
             return res.status(result.code).json({ error: result.message, order: result.order });
         }
